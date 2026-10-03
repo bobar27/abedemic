@@ -79,6 +79,13 @@ function asset_url(string $path): string
 define('GEMINI_API_KEY', 'isi_api_key_anda_di_sini');
 define('GEMINI_MODEL', 'gemini-3.1-flash-lite');
 
+// ==== Aturan game "Run & Jump" ====
+// Semua angka ekonomi game dikumpulkan di sini supaya gampang disetel dari satu tempat.
+define('DISTANCE_BONUS_METERS', 2000); // Tiap 2000 meter dapat bonus
+define('DISTANCE_BONUS_COINS', 10);    // Besarnya bonus per 2000 meter
+define('GAME_MAX_RUN_SECONDS', 120);  // Batas durasi satu run
+define('GAME_MAX_COINS_PER_RUN', 300);
+
 define('ABE_SYSTEM_PROMPT', <<<PROMPT
 Kamu adalah "Abe", maskot penjaga quest board di aplikasi belajar Abedemic.
 Tugasmu: membantu siswa belajar lewat tiga mode saja - meringkas materi yang mereka berikan,

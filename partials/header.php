@@ -14,13 +14,15 @@ $contentClass = $contentClass ?? '';
 $showStrip = $showStrip ?? false;
 $showMenu = $showMenu ?? ($tab !== null);
 
-// Dipakai modal Riwayat di footer.php. Halaman yang butuh query sendiri (chat/summary/quiz)
-// tetap pakai nilai masing-masing supaya tidak dobel query.
+// Dipakai modal Riwayat di footer.php dan badge koin di sidebar. Halaman yang butuh
+// query sendiri (chat/summary/quiz) tetap pakai nilai masing-masing supaya tidak dobel query.
 $sidebarHistory = $sidebarHistory ?? [
 	'chat' => get_conversations($user['id'], 12),
 	'summaries' => get_summaries($user['id'], 8),
 	'quizzes' => get_quizzes($user['id'], 8),
+	'quizScores' => get_attempt_scores($user['id']),
 ];
+$wallet = $wallet ?? get_wallet($user['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +46,9 @@ $sidebarHistory = $sidebarHistory ?? [
 					<span class="profile-name">Profile</span>
 				</button>
 				<button class="side-link history-link" type="button" data-open="historyModal">Riwayat</button>
+				<a class="wallet-badge" href="games.php" title="Saldo koin dari game Run &amp; Jump">
+					<img src="<?= e(asset_url('img/coin.png')) ?>" alt=""><?= (int) $wallet['coins'] ?>
+				</a>
 				<?php if ($showMenu): ?>
 					<a class="side-link menu-link" href="index.php">Menu</a>
 				<?php endif; ?>

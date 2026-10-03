@@ -22,10 +22,11 @@ $user['email'] = (string) $user['email'];
 $user['language'] = (string) $user['language'];
 $user['created_at'] = (string) $user['created_at'];
 
-$sidebarHistory = $sidebarHistory ?? ['chat' => [], 'summaries' => [], 'quizzes' => []];
+$sidebarHistory = $sidebarHistory ?? ['chat' => [], 'summaries' => [], 'quizzes' => [], 'quizScores' => []];
 $sidebarHistory['chat'] = $sidebarHistory['chat'] ?? [];
 $sidebarHistory['summaries'] = $sidebarHistory['summaries'] ?? [];
 $sidebarHistory['quizzes'] = $sidebarHistory['quizzes'] ?? [];
+$sidebarHistory['quizScores'] = $sidebarHistory['quizScores'] ?? [];
 
 $joinedAt = strtotime($user['created_at']);
 $backPage = basename((string) ($_SERVER['SCRIPT_NAME'] ?? 'index.php'));
@@ -106,19 +107,25 @@ if (!in_array($backPage, $allowedBack, true)) {
 
 			<section class="history-group">
 				<h3>Kuis</h3>
-				<?php if ($sidebarHistory['quizzes']): ?>
-					<ul class="history-items">
-						<?php foreach ($sidebarHistory['quizzes'] as $item): ?>
-							<li>
-								<a class="history-main" href="quiz.php?view=<?= (int) $item['id'] ?>">
-									<span class="history-title"><?= e($item['source_label']) ?></span>
-									<span class="history-meta"><?= e(date('d M, H:i', strtotime($item['created_at']))) ?></span>
-								</a>
-								<a class="history-go" href="quiz.php?view=<?= (int) $item['id'] ?>">Buka</a>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php else: ?>
+<?php if ($sidebarHistory['quizzes']): ?>
+						<ul class="history-items">
+							<?php foreach ($sidebarHistory['quizzes'] as $item): ?>
+								<?php $attempt = $sidebarHistory['quizScores'][(int) $item['id']] ?? null; ?>
+								<li>
+									<a class="history-main" href="quiz.php?view=<?= (int) $item['id'] ?>">
+										<span class="history-title"><?= e($item['source_label']) ?></span>
+										<span class="history-meta">
+											<?php if ($attempt): ?>
+												Skor <?= (int) $attempt['score'] ?>/<?= (int) $attempt['total'] ?> &middot;
+											<?php endif; ?>
+											<?= e(date('d M, H:i', strtotime($item['created_at']))) ?>
+										</span>
+									</a>
+									<a class="history-go" href="quiz.php?view=<?= (int) $item['id'] ?>">Kerjakan</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php else: ?>
 					<p class="history-empty">Belum ada kuis.</p>
 				<?php endif; ?>
 			</section>

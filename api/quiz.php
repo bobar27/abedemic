@@ -47,7 +47,12 @@ if ($source === 'chat') {
 }
 
 $language = $user['language'] === 'en' ? 'English' : 'Bahasa Indonesia';
-$systemPrompt = ABE_SYSTEM_PROMPT . "\n\nTugas kamu sekarang: buat 5 soal pilihan ganda (A-D) dari materi yang diberikan, " .
+
+// Jumlah soal: 10 atau 20 (default 10). Nilai lain dipaksa ke 10 supaya tidak boros token.
+$requestedCount = safe_int($_POST['count'] ?? 10, 1, 40);
+$questionCount = $requestedCount >= 20 ? 20 : 10;
+
+$systemPrompt = ABE_SYSTEM_PROMPT . "\n\nTugas kamu sekarang: buat $questionCount soal pilihan ganda (A-D) dari materi yang diberikan, " .
 	"lengkap dengan penjelasan jawaban. Jawab dalam $language.";
 
 $schema = [

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login | Abedemic</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+	<main class="login-shell">
+		<header class="login-brand">ABEDEMIC</header>
+		<section class="login-panel" aria-labelledby="login-title">
+			<h1 id="login-title" class="sr-only">Log in to Abedemic</h1>
+			<form class="login-form" action="index.html" method="get">
+				<label class="field">
+					<span>Username</span>
+					<input type="text" name="username" placeholder="Username" autocomplete="username" required>
+				</label>
+				<label class="field">
+					<span>Email Address</span>
+					<input type="email" name="email" placeholder="Email Address" autocomplete="email" required>
+				</label>
+				<label class="field">
+					<span>Password</span>
+					<input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+				</label>
+				<button class="login-button" type="submit">Log In</button>
+				<p class="account-prompt">New adventurer? <a href="register.html">Create an account</a></p>
+			</form>
+		</section>
+	</main>
+</body>
+</html>

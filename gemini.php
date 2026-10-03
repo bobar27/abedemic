@@ -20,7 +20,9 @@ function call_gemini(string $systemPrompt, array $parts, ?array $responseSchema 
 	$apiKey = trim(GEMINI_API_KEY);
 	$model = trim(GEMINI_MODEL);
 
-	if ($apiKey === '' || in_array($apiKey, ['ISI_API_KEY_GEMINI_DI_SINI', 'YOUR_API_KEY_HERE'], true)) {
+	// Placeholder yang masih dipakai di config.php. Kalau salah satu masih terisi,
+// berhenti di sini dengan pesan jelas, bukan error 400 dari Google.
+if ($apiKey === '' || in_array($apiKey, ['ISI_API_KEY_GEMINI_DI_SINI', 'YOUR_API_KEY_HERE', 'isi_api_key_anda_di_sini'], true)) {
 		throw new GeminiException('GEMINI_API_KEY belum diisi di config.php.');
 	}
 	if ($model === '') {

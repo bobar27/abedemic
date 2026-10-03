@@ -76,6 +76,36 @@
 	color: #cdfd6d;
 }
 
+/* ---------- Badge saldo koin di sidebar (per akun) ---------- */
+.wallet-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 8px;
+	padding: 6px 14px;
+	border: 3px solid var(--line);
+	border-radius: 999px;
+	background: var(--panel-dark);
+	color: #cdfd6d;
+	font-family: var(--font-body);
+	font-size: 13px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.wallet-badge img {
+	width: 18px;
+	height: 18px;
+	object-fit: contain;
+	image-rendering: pixelated;
+}
+
+.wallet-badge:hover,
+.wallet-badge:focus-visible {
+	background: var(--slate);
+	color: var(--cream);
+}
+
 /* ---------- Sambutan ---------- */
 .welcome-name {
 	color: #cdfd6d;
